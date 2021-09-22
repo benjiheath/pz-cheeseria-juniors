@@ -3,9 +3,22 @@ import React, { useState } from 'react';
 import { StyledButton } from '../App.styles';
 import RestoreIcon from '@material-ui/icons/Restore';
 import RecentPurchasesDrawer from './Drawer';
+import { CartItemType } from '../App';
+import { useQuery } from 'react-query';
 
 const RecentPurchases = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const getRecentPurchases = async (): Promise<CartItemType[]> => await (await fetch(`api/purchases`)).json();
+
+  const { data, error } = useQuery<CartItemType[]>('purchases', getRecentPurchases);
+
+  console.log('error:', error);
+
+  console.log('RECENT PURCHASES:', data);
+
+  const Drawer = () =>
+    data ? <RecentPurchasesDrawer drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} data={data} /> : null;
 
   return (
     <>
@@ -13,7 +26,7 @@ const RecentPurchases = () => {
         <RestoreIcon />
         <Typography variant='subtitle2'>Recent Purchases</Typography>
       </StyledButton>
-      <RecentPurchasesDrawer drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
+      <Drawer />
     </>
   );
 };
