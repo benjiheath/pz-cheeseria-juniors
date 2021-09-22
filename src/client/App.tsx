@@ -14,6 +14,7 @@ import { Wrapper, StyledButton, StyledAppBar, HeaderTypography } from './App.sty
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import RecentPurchasesDrawer from './RecentPurchases/Drawer';
 import RecentPurchases from './RecentPurchases/RecentPurchases';
+import GlobalStyle from './globalStyles';
 // Types
 export type CartItemType = {
   id: number;
@@ -66,39 +67,42 @@ const App = () => {
   if (error) return <div>Something went wrong ...</div>;
 
   return (
-    <Wrapper>
-      <StyledAppBar position='static'>
-        <Toolbar>
-          <Grid container direction='row' justify='space-between' alignItems='center'>
-            <RecentPurchases />
+    <>
+      <GlobalStyle />
+      <Wrapper>
+        <StyledAppBar position='static'>
+          <Toolbar>
+            <Grid container direction='row' justify='space-between' alignItems='center'>
+              <RecentPurchases />
 
-            <HeaderTypography variant='h3' noWrap>
-              Welcome to Patient Zero's Cheeseria
-            </HeaderTypography>
+              <HeaderTypography variant='h3' noWrap>
+                Welcome to Patient Zero's Cheeseria
+              </HeaderTypography>
 
-            <StyledButton onClick={() => setCartOpen(true)}>
-              <Badge badgeContent={getTotalItems(cartItems)} color='error' data-cy='badge-count'>
-                <AddShoppingCartIcon />
-              </Badge>
+              <StyledButton onClick={() => setCartOpen(true)}>
+                <Badge badgeContent={getTotalItems(cartItems)} color='error' data-cy='badge-count'>
+                  <AddShoppingCartIcon />
+                </Badge>
 
-              <Typography variant='subtitle2'>Cart</Typography>
-            </StyledButton>
-          </Grid>
-        </Toolbar>
-      </StyledAppBar>
+                <Typography variant='subtitle2'>Cart</Typography>
+              </StyledButton>
+            </Grid>
+          </Toolbar>
+        </StyledAppBar>
 
-      <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
-        <Cart cartItems={cartItems} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart} />
-      </Drawer>
+        <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+          <Cart cartItems={cartItems} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart} />
+        </Drawer>
 
-      <Grid container spacing={3}>
-        {data?.map((item) => (
-          <Grid item key={item.id} xs={12} sm={4}>
-            <Item item={item} handleAddToCart={handleAddToCart} />
-          </Grid>
-        ))}
-      </Grid>
-    </Wrapper>
+        <Grid container spacing={3}>
+          {data?.map((item) => (
+            <Grid item key={item.id} xs={12} sm={4}>
+              <Item item={item} handleAddToCart={handleAddToCart} />
+            </Grid>
+          ))}
+        </Grid>
+      </Wrapper>
+    </>
   );
 };
 

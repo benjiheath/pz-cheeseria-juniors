@@ -8,7 +8,6 @@ export const Wrapper = styled.div`
   padding: 20px 30px 0;
   width: 400px;
   height: 100%;
-  font-family: Arial, Helvetica, sans-serif;
 
   p {
     margin: 25px 0 35px;
