@@ -25,6 +25,8 @@ const Cart: React.FC<Props> = ({ cartItems, addToCart, removeFromCart }) => {
     console.log('res:', res);
   };
 
+  console.log('cartItems:', cartItems.length);
+
   return (
     <Wrapper>
       <h2>Your Shopping Cart</h2>
@@ -33,7 +35,12 @@ const Cart: React.FC<Props> = ({ cartItems, addToCart, removeFromCart }) => {
         <CartItem key={item.id} item={item} addToCart={addToCart} removeFromCart={removeFromCart} />
       ))}
       <h2>Total: ${calculateTotal(cartItems).toFixed(2)}</h2>
-      <Button variant='contained' color='primary' onClick={() => purchaseHandler()}>
+      <Button
+        variant='contained'
+        color='primary'
+        onClick={() => purchaseHandler()}
+        disabled={cartItems.length < 1}
+      >
         Purchase
       </Button>
     </Wrapper>
