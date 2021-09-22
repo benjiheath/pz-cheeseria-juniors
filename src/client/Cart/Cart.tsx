@@ -2,7 +2,7 @@ import CartItem from './CartItem/CartItem';
 import { Wrapper } from './Cart.styles';
 import { CartItemType } from '../App';
 import { Button } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 
 type Props = {
   cartItems: CartItemType[];
@@ -21,23 +21,33 @@ const Cart: React.FC<Props> = ({
   setCartOpen,
   setSnackbarOpen,
 }) => {
+  const [error, setError] = useState(null);
+
   const calculateTotal = (items: CartItemType[]) =>
     items.reduce((ack: number, item) => ack + item.amount * item.price, 0);
 
   const purchaseHandler = async () => {
-    const res = await fetch('api/purchases', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(cartItems),
-    });
+    try {
+      const res = await fetch('api/purchases', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(cartItems),
+      });
 
-    setCartOpen(false);
-    setSnackbarOpen(true);
-    setCartItems([]);
-
-    console.log('res:', res);
+      if (res.status === 200) {
+        setError(null);
+        setCartOpen(false);
+        setSnackbarOpen(true);
+        setCartItems([]);
+      } else {
+        throw new Error(`${res.status}`);
+      }
+    } catch (err) {
+      setError(err);
+      console.error('purchaseHandler error:', err);
+    }
   };
 
   console.log('cartItems:', cartItems.length);
@@ -58,6 +68,7 @@ const Cart: React.FC<Props> = ({
       >
         Purchase
       </Button>
+      {error ? <span>There was an problem with your purchase. Please try again.</span> : null}
     </Wrapper>
   );
 };
