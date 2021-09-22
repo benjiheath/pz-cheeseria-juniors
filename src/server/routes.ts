@@ -16,7 +16,13 @@ router.get('/api/purchases', (req, res, next) => {
 router.post('/api/purchases', (req, res, next) => {
   const purchasedItems = req.body;
 
-  fs.writeFile(`src/server/data/purchases.json`, JSON.stringify(purchasedItems), (err: Error) => {
+  const storedPurchases = JSON.parse(fs.readFileSync(`src/server/data/purchases.json`));
+
+  const appendedPurchases = [...purchasedItems, ...storedPurchases];
+
+  console.log('appenede:', appendedPurchases);
+
+  fs.writeFile(`src/server/data/purchases.json`, JSON.stringify(appendedPurchases), (err: Error) => {
     if (err) {
       console.error(err);
       res.status(500).end();
