@@ -28,7 +28,10 @@ const RecentPurchasesDrawer = ({ drawerOpen, setDrawerOpen, data }: Props) => {
   return (
     <Drawer anchor='left' open={drawerOpen} onClose={handleClose}>
       {!imgLoaded && <CircularProgress />}
-      <Wrapper style={imgLoaded ? {} : { display: 'none' }}>{items}</Wrapper>
+      <Wrapper style={imgLoaded ? {} : { display: 'none' }}>
+        <h2>Recent Purchases</h2>
+        {items}
+      </Wrapper>
     </Drawer>
   );
 };
