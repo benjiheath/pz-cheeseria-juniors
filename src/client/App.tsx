@@ -12,6 +12,8 @@ import Badge from '@material-ui/core/Badge';
 // Styles
 import { Wrapper, StyledButton, StyledAppBar, HeaderTypography } from './App.styles';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import RecentPurchasesDrawer from './RecentPurchases/Drawer';
+import RecentPurchases from './RecentPurchases/RecentPurchases';
 // Types
 export type CartItemType = {
   id: number;
@@ -68,10 +70,7 @@ const App = () => {
       <StyledAppBar position='static'>
         <Toolbar>
           <Grid container direction='row' justify='space-between' alignItems='center'>
-            <StyledButton>
-              <RestoreIcon />
-              <Typography variant='subtitle2'>Recent Purchases</Typography>
-            </StyledButton>
+            <RecentPurchases />
 
             <HeaderTypography variant='h3' noWrap>
               Welcome to Patient Zero's Cheeseria

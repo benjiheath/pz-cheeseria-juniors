@@ -8,11 +8,11 @@ export const Wrapper = styled.div`
   border: 1px solid lightblue;
   border-radius: 20px;
   height: 100%;
-  transition: 0.3s;
+  transition: 0.4s;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 1px 3px 10px 2px #d6d6d6;
+    box-shadow: 1px 3px 12px 1px #e2e2e2;
     cursor: pointer;
   }
 
