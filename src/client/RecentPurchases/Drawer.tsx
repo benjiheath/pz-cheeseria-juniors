@@ -1,9 +1,14 @@
 import { Drawer } from '@material-ui/core';
 
-const RecentPurchasesDrawer = () => {
+interface Props {
+  drawerOpen: boolean;
+  setDrawerOpen: () => void;
+}
+
+const RecentPurchasesDrawer = ({ drawerOpen, setDrawerOpen }) => {
   return (
-    <Drawer anchor='left' open={false}>
-      xxxx
+    <Drawer anchor='left' open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+      test
     </Drawer>
   );
 };
