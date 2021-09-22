@@ -11,24 +11,24 @@ const RecentPurchases = () => {
 
   const getRecentPurchases = async (): Promise<CartItemType[]> => await (await fetch(`api/purchases`)).json();
 
-  const { data, isLoading, error } = useQuery<CartItemType[]>('purchases', getRecentPurchases);
+  const { data, isLoading, refetch } = useQuery<CartItemType[]>('purchases', getRecentPurchases, {
+    refetchOnWindowFocus: false,
+    enabled: false,
+  });
 
-  console.log('error:', error);
-
-  console.log('RECENT PURCHASES:', data);
-
-  // const Drawer = () =>
-  //   data && data.length > 0 ? (
-  //     <RecentPurchasesDrawer drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} data={data} />
-  //   ) : null;
+  const handleClick = async () => {
+    await getRecentPurchases();
+    refetch();
+    setDrawerOpen(true);
+  };
 
   return (
     <>
-      <StyledButton onClick={() => setDrawerOpen(true)}>
+      <StyledButton onClick={handleClick}>
         <RestoreIcon />
         <Typography variant='subtitle2'>Recent Purchases</Typography>
       </StyledButton>
-      {!isLoading && (
+      {!isLoading && data && (
         <RecentPurchasesDrawer drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} data={data} />
       )}
     </>

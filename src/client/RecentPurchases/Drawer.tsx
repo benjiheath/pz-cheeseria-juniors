@@ -11,25 +11,22 @@ interface Props {
 }
 
 const RecentPurchasesDrawer = ({ drawerOpen, setDrawerOpen, data }: Props) => {
-  const [imgLoaded, setImgLoaded] = useState(false);
-
   const handleClose = () => {
     setDrawerOpen(false);
-    setImgLoaded(false);
   };
+
+  console.log('rest:', data);
+  console.log('datas:', data.length);
 
   const items =
     data.length >= 1 ? (
-      data.map((item) => <RecentPurchaseItem item={item} key={item.id} setImgLoaded={setImgLoaded} />)
+      data.map((item) => <RecentPurchaseItem item={item} key={item.id} />)
     ) : (
       <>No purchases to show</>
     );
 
-  // const Spinner = () => (!imgLoaded && data.length > 0 ? <CircularProgress /> : null);
-
   return (
     <Drawer anchor='left' open={drawerOpen} onClose={handleClose}>
-      {/* <Spinner /> */}
       <Wrapper>
         <h2>Recent Purchases</h2>
         {items}
