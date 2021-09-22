@@ -7,12 +7,10 @@ import Drawer from '@material-ui/core/Drawer';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import RestoreIcon from '@material-ui/icons/Restore';
 import Badge from '@material-ui/core/Badge';
 // Styles
 import { Wrapper, StyledButton, StyledAppBar, HeaderTypography } from './App.styles';
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
-import RecentPurchasesDrawer from './RecentPurchases/Drawer';
+import { Snackbar, SnackbarContent, Toolbar, Typography } from '@material-ui/core';
 import RecentPurchases from './RecentPurchases/RecentPurchases';
 import GlobalStyle from './globalStyles';
 // Types
@@ -31,7 +29,7 @@ const getCheeses = async (): Promise<CartItemType[]> => await (await fetch(`api/
 const App = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([] as CartItemType[]);
-  const [itemDialogOpen, setItemDialogOpen] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const { data, isLoading, error } = useQuery<CartItemType[]>('cheeses', getCheeses);
   console.log('data', data);
 
@@ -70,6 +68,21 @@ const App = () => {
     <>
       <GlobalStyle />
       <Wrapper>
+        <Snackbar
+          open={snackbarOpen}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          autoHideDuration={2000}
+          onClose={() => setSnackbarOpen(false)}
+        >
+          <SnackbarContent
+            style={{
+              backgroundColor: 'green',
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+            message='Your purchase was successful!'
+          />
+        </Snackbar>
         <StyledAppBar position='static'>
           <Toolbar>
             <Grid container direction='row' justify='space-between' alignItems='center'>
@@ -91,7 +104,14 @@ const App = () => {
         </StyledAppBar>
 
         <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
-          <Cart cartItems={cartItems} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart} />
+          <Cart
+            cartItems={cartItems}
+            addToCart={handleAddToCart}
+            removeFromCart={handleRemoveFromCart}
+            setCartItems={setCartItems}
+            setCartOpen={setCartOpen}
+            setSnackbarOpen={setSnackbarOpen}
+          />
         </Drawer>
 
         <Grid container spacing={3}>

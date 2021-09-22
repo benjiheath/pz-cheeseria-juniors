@@ -3,7 +3,7 @@ import { TitleAndPrice, Wrapper } from './RecentPurchaseItem.styles';
 
 interface Props {
   item: CartItemType;
-  setImgLoaded: (boolean) => void;
+  setImgLoaded: (value: boolean) => void;
 }
 
 const RecentPurchaseItem = ({ item, setImgLoaded }: Props) => {
@@ -11,7 +11,11 @@ const RecentPurchaseItem = ({ item, setImgLoaded }: Props) => {
     <Wrapper>
       <img src={item.image} alt={item.title} onLoad={() => setImgLoaded(true)} />
       <TitleAndPrice>
-        <h3>{item.title}</h3>
+        <h3>
+          {item.title}
+          &nbsp;
+          <span>({item.amount})</span>
+        </h3>
         <span>${item.price}</span>
       </TitleAndPrice>
     </Wrapper>

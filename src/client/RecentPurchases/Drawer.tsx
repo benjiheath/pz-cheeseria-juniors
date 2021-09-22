@@ -6,7 +6,7 @@ import RecentPurchaseItem from './RecentPurchaseItem';
 
 interface Props {
   drawerOpen: boolean;
-  setDrawerOpen: (boolean) => void;
+  setDrawerOpen: (value: boolean) => void;
   data: CartItemType[];
 }
 

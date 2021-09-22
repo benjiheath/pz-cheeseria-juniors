@@ -2,14 +2,25 @@ import CartItem from './CartItem/CartItem';
 import { Wrapper } from './Cart.styles';
 import { CartItemType } from '../App';
 import { Button } from '@material-ui/core';
+import React from 'react';
 
 type Props = {
   cartItems: CartItemType[];
   addToCart: (clickedItem: CartItemType) => void;
   removeFromCart: (id: number) => void;
+  setCartItems: (value: [] | CartItemType[]) => void;
+  setCartOpen: (value: boolean) => void;
+  setSnackbarOpen: (value: boolean) => void;
 };
 
-const Cart: React.FC<Props> = ({ cartItems, addToCart, removeFromCart }) => {
+const Cart: React.FC<Props> = ({
+  cartItems,
+  addToCart,
+  removeFromCart,
+  setCartItems,
+  setCartOpen,
+  setSnackbarOpen,
+}) => {
   const calculateTotal = (items: CartItemType[]) =>
     items.reduce((ack: number, item) => ack + item.amount * item.price, 0);
 
@@ -21,6 +32,10 @@ const Cart: React.FC<Props> = ({ cartItems, addToCart, removeFromCart }) => {
       },
       body: JSON.stringify(cartItems),
     });
+
+    setCartOpen(false);
+    setSnackbarOpen(true);
+    setCartItems([]);
 
     console.log('res:', res);
   };
