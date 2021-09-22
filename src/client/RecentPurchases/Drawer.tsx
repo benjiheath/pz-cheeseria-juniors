@@ -25,10 +25,12 @@ const RecentPurchasesDrawer = ({ drawerOpen, setDrawerOpen, data }: Props) => {
       <>No purchases to show</>
     );
 
+  // const Spinner = () => (!imgLoaded && data.length > 0 ? <CircularProgress /> : null);
+
   return (
     <Drawer anchor='left' open={drawerOpen} onClose={handleClose}>
-      {!imgLoaded && <CircularProgress />}
-      <Wrapper style={imgLoaded ? {} : { display: 'none' }}>
+      {/* <Spinner /> */}
+      <Wrapper>
         <h2>Recent Purchases</h2>
         {items}
       </Wrapper>

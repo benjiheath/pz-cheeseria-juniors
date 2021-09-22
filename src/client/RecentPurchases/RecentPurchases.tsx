@@ -11,14 +11,16 @@ const RecentPurchases = () => {
 
   const getRecentPurchases = async (): Promise<CartItemType[]> => await (await fetch(`api/purchases`)).json();
 
-  const { data, error } = useQuery<CartItemType[]>('purchases', getRecentPurchases);
+  const { data, isLoading, error } = useQuery<CartItemType[]>('purchases', getRecentPurchases);
 
   console.log('error:', error);
 
   console.log('RECENT PURCHASES:', data);
 
-  const Drawer = () =>
-    data ? <RecentPurchasesDrawer drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} data={data} /> : null;
+  // const Drawer = () =>
+  //   data && data.length > 0 ? (
+  //     <RecentPurchasesDrawer drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} data={data} />
+  //   ) : null;
 
   return (
     <>
@@ -26,7 +28,9 @@ const RecentPurchases = () => {
         <RestoreIcon />
         <Typography variant='subtitle2'>Recent Purchases</Typography>
       </StyledButton>
-      <Drawer />
+      {!isLoading && (
+        <RecentPurchasesDrawer drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} data={data} />
+      )}
     </>
   );
 };
