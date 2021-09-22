@@ -1,6 +1,6 @@
 import * as express from 'express';
 const cheeses = require('./data/cheeses.json');
-const cart = require('./data/cart.json');
+const purchases = require('./data/purchases.json');
 const fs = require('fs');
 
 const router = express.Router();
@@ -9,14 +9,14 @@ router.get('/api/cheeses', (req, res, next) => {
   res.json(cheeses);
 });
 
-router.get('/api/cart', (req, res, next) => {
-  res.json(cart);
+router.get('/api/purchases', (req, res, next) => {
+  res.json(purchases);
 });
 
-router.post('/api/cart', (req, res, next) => {
-  const cartItems = req.body;
+router.post('/api/purchases', (req, res, next) => {
+  const purchasedItems = req.body;
 
-  fs.writeFile(`src/server/data/cart.json`, JSON.stringify(cartItems), (err: Error) => {
+  fs.writeFile(`src/server/data/purchases.json`, JSON.stringify(purchasedItems), (err: Error) => {
     if (err) {
       console.error(err);
       res.status(500).end();

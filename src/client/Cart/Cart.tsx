@@ -14,7 +14,7 @@ const Cart: React.FC<Props> = ({ cartItems, addToCart, removeFromCart }) => {
     items.reduce((ack: number, item) => ack + item.amount * item.price, 0);
 
   const purchaseHandler = async () => {
-    const res = await fetch('api/cart', {
+    const res = await fetch('api/purchases', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
