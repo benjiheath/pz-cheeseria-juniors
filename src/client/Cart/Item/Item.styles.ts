@@ -8,6 +8,13 @@ export const Wrapper = styled.div`
   border: 1px solid lightblue;
   border-radius: 20px;
   height: 100%;
+  transition: 0.3s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 1px 3px 10px 2px #d6d6d6;
+    cursor: pointer;
+  }
 
   button {
     border-radius: 0 0 20px 20px;
