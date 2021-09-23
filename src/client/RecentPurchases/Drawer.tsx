@@ -1,5 +1,4 @@
-import { CircularProgress, Drawer } from '@material-ui/core';
-import React, { useState } from 'react';
+import { Drawer } from '@material-ui/core';
 import { CartItemType } from '../App';
 import { Wrapper } from './Drawer.styles';
 import RecentPurchaseItem from './RecentPurchaseItem';

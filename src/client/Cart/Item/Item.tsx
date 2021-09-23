@@ -26,7 +26,12 @@ const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
 
   return (
     <>
-      <ItemDialog item={item} open={itemDialogOpen} handleClose={handleCloseDialog} handleAddToCart={handleAddToCart} />
+      <ItemDialog
+        item={item}
+        open={itemDialogOpen}
+        handleClose={handleCloseDialog}
+        handleAddToCart={handleAddToCart}
+      />
       <Wrapper onClick={() => handleItemClick()}>
         <img src={item.image} alt={item.title} />
         <div>
@@ -35,7 +40,7 @@ const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
         </div>
         <Button
           onClick={(e) => {
-            e.stopPropagation();
+            e.stopPropagation(); // preventing click event from bubbling up to Wrapper & triggering Dialog
             handleAddToCart(item);
           }}
           data-cy={`add-to-cart-${item.id}`}

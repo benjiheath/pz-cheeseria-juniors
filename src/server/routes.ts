@@ -14,6 +14,7 @@ router.get('/api/purchases', (req, res, next) => {
 });
 
 router.post('/api/purchases', (req, res, next) => {
+  // susceptible to errors/inacurrate data e.g if multiple requests are sent simultaneously
   const purchasedItems = req.body;
   const storedPurchases = JSON.parse(fs.readFileSync(`src/server/data/purchases.json`));
   const appendedPurchases = [...purchasedItems, ...storedPurchases];
@@ -22,6 +23,7 @@ router.post('/api/purchases', (req, res, next) => {
     if (err) {
       console.error(err);
       res.status(500).end();
+      return;
     }
     res.status(200).end();
   });

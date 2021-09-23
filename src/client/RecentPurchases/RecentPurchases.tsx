@@ -1,10 +1,10 @@
-import { Typography } from '@material-ui/core';
 import React, { useState } from 'react';
+import { useQuery } from 'react-query';
 import { StyledButton } from '../App.styles';
+import { Typography } from '@material-ui/core';
 import RestoreIcon from '@material-ui/icons/Restore';
 import RecentPurchasesDrawer from './Drawer';
 import { CartItemType } from '../App';
-import { useQuery } from 'react-query';
 
 const RecentPurchases = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
