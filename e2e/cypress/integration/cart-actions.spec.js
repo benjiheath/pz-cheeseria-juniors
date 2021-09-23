@@ -1,8 +1,8 @@
 /// <reference types="cypress" />
 
-const addItemsToCart = () => {
-  cy.get('[data-cy=add-to-cart-2]').click();
-  cy.get('[data-cy=add-to-cart-3]').click();
+const addItemsToCart = (itemID1, itemID2) => {
+  cy.get(`[data-cy=add-to-cart-${itemID1}]`).click();
+  cy.get(`[data-cy=add-to-cart-${itemID2}]`).click();
 
   cy.get('[data-cy=badge-count]').should('have.text', '2');
 };
@@ -13,11 +13,11 @@ context('Cart Actions', () => {
   });
 
   it('Add items to cart', () => {
-    addItemsToCart();
+    addItemsToCart(2, 3);
   });
 
   it('Purchase items', () => {
-    addItemsToCart();
+    addItemsToCart(4, 5);
 
     cy.get('[data-cy=open-cart-btn]').click();
 
