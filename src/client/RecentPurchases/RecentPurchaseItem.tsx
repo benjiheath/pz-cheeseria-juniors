@@ -15,7 +15,7 @@ const RecentPurchaseItem = ({ item }: Props) => {
           &nbsp;
           <span>{`(${item.amount})`}</span>
         </h3>
-        <span>${item.price * item.amount}</span>
+        <span>${(item.price * item.amount).toFixed(2)}</span>
       </TitleAndPrice>
     </Wrapper>
   );
