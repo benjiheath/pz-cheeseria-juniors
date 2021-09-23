@@ -24,7 +24,7 @@ const RecentPurchasesDrawer = ({ drawerOpen, setDrawerOpen, data }: Props) => {
 
   return (
     <Drawer anchor='left' open={drawerOpen} onClose={handleClose}>
-      <Wrapper>
+      <Wrapper data-cy='recent-purchases-drawer'>
         <h2>Recent Purchases</h2>
         {items}
       </Wrapper>

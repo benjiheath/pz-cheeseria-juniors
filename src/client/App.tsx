@@ -80,6 +80,7 @@ const App = () => {
               justifyContent: 'center',
             }}
             message='Your purchase was successful!'
+            data-cy='purchase-snackbar-content'
           />
         </Snackbar>
         <StyledAppBar position='static'>
@@ -91,7 +92,7 @@ const App = () => {
                 Welcome to Patient Zero's Cheeseria
               </HeaderTypography>
 
-              <StyledButton onClick={() => setCartOpen(true)}>
+              <StyledButton onClick={() => setCartOpen(true)} data-cy='open-cart-btn'>
                 <Badge badgeContent={getTotalItems(cartItems)} color='error' data-cy='badge-count'>
                   <AddShoppingCartIcon />
                 </Badge>

@@ -63,6 +63,7 @@ const Cart: React.FC<Props> = ({
         color='primary'
         onClick={() => purchaseHandler()}
         disabled={cartItems.length < 1}
+        data-cy='purchase-btn'
       >
         Purchase
       </Button>

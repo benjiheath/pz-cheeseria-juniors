@@ -24,7 +24,7 @@ const RecentPurchases = () => {
 
   return (
     <>
-      <StyledButton onClick={handleClick}>
+      <StyledButton onClick={handleClick} data-cy='recent-purchases-btn'>
         <RestoreIcon />
         <Typography variant='subtitle2'>Recent Purchases</Typography>
       </StyledButton>

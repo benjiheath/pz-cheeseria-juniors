@@ -7,7 +7,7 @@ interface Props {
 
 const RecentPurchaseItem = ({ item }: Props) => {
   return (
-    <Wrapper>
+    <Wrapper data-cy={`recently-purchased-${item.id}`}>
       <img src={item.image} alt={item.title} />
       <TitleAndPrice>
         <h3>
