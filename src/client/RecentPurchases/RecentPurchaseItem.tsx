@@ -13,9 +13,9 @@ const RecentPurchaseItem = ({ item }: Props) => {
         <h3>
           {item.title}
           &nbsp;
-          <span>({item.amount})</span>
+          <span>{`(${item.amount})`}</span>
         </h3>
-        <span>${item.price}</span>
+        <span>${item.price * item.amount}</span>
       </TitleAndPrice>
     </Wrapper>
   );

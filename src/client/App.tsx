@@ -31,7 +31,6 @@ const App = () => {
   const [cartItems, setCartItems] = useState([] as CartItemType[]);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const { data, isLoading, error } = useQuery<CartItemType[]>('cheeses', getCheeses);
-  console.log('data', data);
 
   const getTotalItems = (items: CartItemType[]) => items.reduce((ack: number, item) => ack + item.amount, 0);
 

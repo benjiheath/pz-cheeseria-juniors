@@ -15,9 +15,6 @@ const RecentPurchasesDrawer = ({ drawerOpen, setDrawerOpen, data }: Props) => {
     setDrawerOpen(false);
   };
 
-  console.log('rest:', data);
-  console.log('datas:', data.length);
-
   const items =
     data.length >= 1 ? (
       data.map((item) => <RecentPurchaseItem item={item} key={item.id} />)

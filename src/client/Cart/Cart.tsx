@@ -50,8 +50,6 @@ const Cart: React.FC<Props> = ({
     }
   };
 
-  console.log('cartItems:', cartItems.length);
-
   return (
     <Wrapper>
       <h2>Your Shopping Cart</h2>
