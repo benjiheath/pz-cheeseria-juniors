@@ -27,6 +27,8 @@ context('Cart Actions', () => {
       .children()
       .should('have.text', 'Your purchase was successful!');
 
+    // I've learned that using cy.wait like this may lead to testing inconsistencies between different machines
+    // However i'm using it here as a work-around. Without it, cypress doesn't seem to be able to open the drawer.
     cy.wait(1000);
 
     cy.get('[data-cy=recent-purchases-btn]').click();
