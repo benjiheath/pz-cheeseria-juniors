@@ -1,12 +1,13 @@
-import { Drawer } from '@material-ui/core';
+import { Divider, Drawer } from '@material-ui/core';
 import { CartItemType } from '../App';
 import { Wrapper } from './Drawer.styles';
-import RecentPurchaseItem from './RecentPurchaseItem';
+import RecentPurchase from './RecentPurchase';
+import { StoredPurchase } from './RecentPurchases';
 
 interface Props {
   drawerOpen: boolean;
   setDrawerOpen: (value: boolean) => void;
-  data: CartItemType[];
+  data: StoredPurchase[];
 }
 
 const RecentPurchasesDrawer = ({ drawerOpen, setDrawerOpen, data }: Props) => {

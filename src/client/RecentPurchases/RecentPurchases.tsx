@@ -6,12 +6,15 @@ import RestoreIcon from '@material-ui/icons/Restore';
 import RecentPurchasesDrawer from './Drawer';
 import { CartItemType } from '../App';
 
+export type StoredPurchase = { id: string; items: CartItemType[] };
+
 const RecentPurchases = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const getRecentPurchases = async (): Promise<CartItemType[]> => await (await fetch(`api/purchases`)).json();
+  const getRecentPurchases = async (): Promise<StoredPurchase[]> =>
+    await (await fetch(`api/purchases`)).json();
 
-  const { data, isLoading, refetch } = useQuery<CartItemType[]>('purchases', getRecentPurchases, {
+  const { data, isLoading, refetch } = useQuery<StoredPurchase[]>('purchases', getRecentPurchases, {
     refetchOnWindowFocus: false,
     enabled: false,
   });
