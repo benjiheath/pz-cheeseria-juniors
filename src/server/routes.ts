@@ -31,4 +31,10 @@ router.post('/api/purchases', (req, res, next) => {
   });
 });
 
+router.delete('/api/purchases', (req, res, next) => {
+  fs.writeFile(`src/server/data/purchases.json`, '[]', () => {
+    res.status(200).end();
+  });
+});
+
 export default router;
