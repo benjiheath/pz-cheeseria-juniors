@@ -10,9 +10,13 @@ export type StoredPurchase = { id: string; items: CartItemType[] };
 
 const RecentPurchases = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [recentPurchasesState, setRecentPurchasesState] = useState<StoredPurchase[]>([]);
 
-  const getRecentPurchases = async (): Promise<StoredPurchase[]> =>
-    await (await fetch(`api/purchases`)).json();
+  const getRecentPurchases = async (): Promise<StoredPurchase[]> => {
+    const res = await (await fetch(`api/purchases`)).json();
+    setRecentPurchasesState(res);
+    return res;
+  };
 
   const { data, isLoading, refetch } = useQuery<StoredPurchase[]>('purchases', getRecentPurchases, {
     refetchOnWindowFocus: false,
@@ -21,7 +25,7 @@ const RecentPurchases = () => {
 
   const handleClick = async () => {
     await getRecentPurchases();
-    refetch();
+    await refetch();
     setDrawerOpen(true);
   };
 
@@ -32,7 +36,12 @@ const RecentPurchases = () => {
         <Typography variant='subtitle2'>Recent Purchases</Typography>
       </StyledButton>
       {!isLoading && data && (
-        <RecentPurchasesDrawer drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} data={data} />
+        <RecentPurchasesDrawer
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          data={recentPurchasesState}
+          setRecentPurchasesState={setRecentPurchasesState}
+        />
       )}
     </>
   );
