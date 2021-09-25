@@ -1,4 +1,5 @@
 import * as express from 'express';
+import { v4 as uuidv4 } from 'uuid';
 const cheeses = require('./data/cheeses.json');
 const purchases = require('./data/purchases.json');
 const fs = require('fs');
@@ -15,7 +16,7 @@ router.get('/api/purchases', (req, res, next) => {
 
 router.post('/api/purchases', (req, res, next) => {
   // This handler is likely susceptible to errors/inacurrate data e.g if multiple requests are sent simultaneously
-  const purchasedItems = req.body;
+  const [purchasedItems] = [{ id: uuidv4(), items: req.body }];
   const storedPurchases = JSON.parse(fs.readFileSync(`src/server/data/purchases.json`));
   const updatedPurchases =
     storedPurchases.length >= 1 ? [purchasedItems, ...storedPurchases] : [purchasedItems];
