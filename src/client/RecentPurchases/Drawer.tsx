@@ -17,7 +17,12 @@ const RecentPurchasesDrawer = ({ drawerOpen, setDrawerOpen, data }: Props) => {
 
   const items =
     data.length >= 1 ? (
-      data.map((item) => <RecentPurchaseItem item={item} key={item.id} />)
+      data.map((purchase, idx) => (
+        <>
+          <RecentPurchase purchase={purchase} key={purchase.id} />
+          {idx + 1 !== data.length && <Divider />}
+        </>
+      ))
     ) : (
       <>No purchases to show</>
     );
