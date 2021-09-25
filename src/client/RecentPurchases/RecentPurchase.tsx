@@ -26,7 +26,7 @@ const RecentPurchase = ({ purchase }: RecentPurchaseProps) => {
 
   const Total = ({ value, mt }: TotalProps) => (
     <TotalWrapper mt={mt}>
-      <h3>Total:</h3>
+      {isMoreThanOneItem && <h3>Total:</h3>}
       <TotalPrice>${value.toFixed(2)}</TotalPrice>
     </TotalWrapper>
   );
