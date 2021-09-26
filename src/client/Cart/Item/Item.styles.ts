@@ -22,6 +22,7 @@ export const Wrapper = styled.div`
 
   img {
     max-height: 250px;
+    min-height: 250px;
     object-fit: cover;
     border-radius: 20px 20px 0 0;
   }
