@@ -7,6 +7,7 @@ import {
   ItemPrice,
   TotalPrice,
 } from './RecentPurchase.styles';
+import { calculateTotal } from '../Cart/Cart';
 
 interface RecentPurchaseProps {
   purchase: StoredPurchase;
@@ -45,12 +46,7 @@ const RecentPurchase = ({ purchase }: RecentPurchaseProps) => {
           <Price price={price * amount} />
         </IndividualItemWrapper>
       ))}
-      {isMoreThanOneItem && (
-        <Total
-          value={purchase.items.reduce((ack: number, item) => ack + item.amount * item.price, 0)}
-          mt='10px'
-        />
-      )}
+      {isMoreThanOneItem && <Total value={calculateTotal(purchase.items)} mt='10px' />}
     </Wrapper>
   );
 };

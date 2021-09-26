@@ -24,9 +24,9 @@ const RecentPurchases = () => {
   });
 
   const handleClick = async () => {
+    setDrawerOpen(true);
     await getRecentPurchases();
     await refetch();
-    setDrawerOpen(true);
   };
 
   return (

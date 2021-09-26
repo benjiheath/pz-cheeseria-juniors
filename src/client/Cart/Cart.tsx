@@ -13,6 +13,9 @@ type Props = {
   setSnackbarOpen: (value: boolean) => void;
 };
 
+export const calculateTotal = (items: CartItemType[]) =>
+  items.reduce((ack: number, item) => ack + item.amount * item.price, 0);
+
 const Cart: React.FC<Props> = ({
   cartItems,
   addToCart,
@@ -22,9 +25,6 @@ const Cart: React.FC<Props> = ({
   setSnackbarOpen,
 }) => {
   const [error, setError] = useState(null);
-
-  const calculateTotal = (items: CartItemType[]) =>
-    items.reduce((ack: number, item) => ack + item.amount * item.price, 0);
 
   const purchaseHandler = async () => {
     try {
